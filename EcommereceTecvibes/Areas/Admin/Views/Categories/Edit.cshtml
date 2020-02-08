@@ -1,0 +1,30 @@
+﻿@model EcommereceTecvibes.Models.Category
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="col-12 mt-4">
+    <div class="panel">
+        <div class="panel-head">
+            <h5 class="panel-title">Add Category</h5>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Category_ID)
+            <div class="panel-body">
+                <div class="form-group row">
+                    <label class="col-12 col-form-label">Category</label>
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="Category1" value="@Model.Category1" placeholder="Category" required>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer text-right">
+                <button type="submit" class="btn btn-outline btn-success btn-outline-1x btn-gradient btn-shadow m-1">Update</button>
+                <a href="/Admin/Categories/Index" class="btn btn-outline btn-warning btn-outline-1x btn-gradient btn-shadow m-1">Cancel</a>
+            </div>
+        }
+    </div>
+</div>

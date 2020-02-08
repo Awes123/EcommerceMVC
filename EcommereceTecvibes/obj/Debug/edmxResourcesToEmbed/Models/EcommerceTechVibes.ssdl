@@ -19,7 +19,6 @@
     </Key>
     <Property Name="Category_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Category" Type="nvarchar(max)" />
-    <Property Name="Unit" Type="nvarchar(max)" />
     <Property Name="Date_Created" Type="datetime" />
     <Property Name="Date_Modified" Type="datetime" />
   </EntityType>
@@ -77,10 +76,12 @@
     <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Category_ID" Type="int" />
     <Property Name="Product_Name" Type="nvarchar(max)" />
+    <Property Name="Unit" Type="nvarchar(max)" />
     <Property Name="Quantity" Type="int" />
     <Property Name="Sale" Type="nvarchar" MaxLength="10" />
     <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DeliveryCharges" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Final_Price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Status" Type="nvarchar" MaxLength="10" />
     <Property Name="Date_Created" Type="datetime" />

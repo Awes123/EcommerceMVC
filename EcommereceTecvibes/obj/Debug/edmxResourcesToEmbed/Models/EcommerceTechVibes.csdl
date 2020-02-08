@@ -22,7 +22,6 @@
     </Key>
     <Property Name="Category_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Category1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Date_Created" Type="DateTime" Precision="3" />
     <Property Name="Date_Modified" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Products_ToCategory" FromRole="Category" ToRole="Products" />
@@ -98,6 +97,8 @@
     <NavigationProperty Name="Cart_Details" Relationship="Self.FK_Cart_Details_ToTable_1" FromRole="Products" ToRole="Cart_Details" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Products_ToCategory" FromRole="Products" ToRole="Category" />
     <NavigationProperty Name="Product_Image" Relationship="Self.FK_Product_Image_ToProducts" FromRole="Products" ToRole="Product_Image" />
+    <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeliveryCharges" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="UserDetail">
     <Key>

@@ -1,0 +1,98 @@
+﻿@model EcommereceTecvibes.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Final_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Final_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Modified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Modified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Category1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Category1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Product_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,87 @@
+﻿@model EcommereceTecvibes.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="col-12 mt-4">
+    <div class="panel">
+        <div class="panel-head">
+            <h5 class="panel-title">Add Products</h5>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="panel-body">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Category</label>
+                                @Html.DropDownList("Category_ID", null, htmlAttributes: new { @class = "form-control" })
+                                <span class="form-text">Please select Category</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" name="Product_Name" placeholder="Product Name" class="form-control" required />
+                                <span class="form-text">Please enter your Product Name</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Unit</label>
+                                <input type="text" name="Unit" placeholder="Product Unit" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" name="Quantity" placeholder="Product Quantity" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="number" name="Price" placeholder="Product Price" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Discount</label>
+                                <input type="number" name="Discount" placeholder="Product Discount" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Final Price</label>
+                                <input type="number" name="Final_Price" placeholder="Final Price" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" name="Status" required>
+                                    <option value="">Select a Status</option>
+                                    <option value="Available">Available</option>
+                                    <option value="Sold out">Sold out</option>
+                                    <option value="Coming Soon">Coming Soon</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer text-right">
+                <button type="submit" class="btn btn-outline btn-success btn-outline-1x btn-gradient btn-shadow m-1">Submit</button>
+                <a href="/Admin/Categories/Index" class="btn btn-outline btn-warning btn-outline-1x btn-gradient btn-shadow m-1">Cancel</a>
+            </div>
+        }
+    </div>
+</div>
+

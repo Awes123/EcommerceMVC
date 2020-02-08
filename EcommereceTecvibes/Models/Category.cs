@@ -22,7 +22,6 @@ namespace EcommereceTecvibes.Models
     
         public int Category_ID { get; set; }
         public string Category1 { get; set; }
-        public string Unit { get; set; }
         public Nullable<System.DateTime> Date_Created { get; set; }
         public Nullable<System.DateTime> Date_Modified { get; set; }
     

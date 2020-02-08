@@ -22,7 +22,7 @@ namespace EcommereceTecvibes.Controllers
             if (IsValid(User))
             {
                 FormsAuthentication.SetAuthCookie(User.Username, false);
-                return RedirectToAction("Dashboard", "Admin", new { area = "" });
+                return RedirectToAction("Index", "Default", new { area = "Admin" });
             }
             else
             {

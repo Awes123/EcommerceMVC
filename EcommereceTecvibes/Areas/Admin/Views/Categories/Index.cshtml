@@ -1,0 +1,56 @@
+﻿@model IEnumerable<EcommereceTecvibes.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-md-12 mt-4">
+    <div class="panel">
+        <div class="panel-head">
+            <h5 class="panel-title">Categories</h5>
+            <a href="/Admin/Categories/Create" class="btn btn-outline btn-primary btn-outline-1x btn-gradient btn-shadow m-1 float-right">Add</a>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Category
+                        </th>
+                        <th>
+                            Date Created
+                        </th>
+                        <th>
+                           Date Modified
+                        </th>
+                        <th>Edit</th><th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category1)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date_Created)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date_Modified)
+                            </td>
+                            <td>
+                                <a href="/Admin/Categories/Edit?id=@item.Category_ID" class="btn btn-outline btn-info btn-outline-1x btn-gradient btn-shadow">Edit</a>
+                            </td>
+                            <td>
+                                <a href="/Admin/Categories/Delete?id=@item.Category_ID" id="sweetalert-4" class="btn btn-outline btn-danger btn-outline-1x btn-gradient btn-shadow">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

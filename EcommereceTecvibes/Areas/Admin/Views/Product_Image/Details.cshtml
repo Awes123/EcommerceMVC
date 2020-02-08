@@ -1,0 +1,58 @@
+﻿@model EcommereceTecvibes.Models.Product_Image
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product_Image</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Product_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Product_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PrdImg_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

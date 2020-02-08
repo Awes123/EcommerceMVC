@@ -32,6 +32,8 @@ namespace EcommereceTecvibes.Models
         public string Status { get; set; }
         public Nullable<System.DateTime> Date_Created { get; set; }
         public Nullable<System.DateTime> Date_Modified { get; set; }
+        public string Unit { get; set; }
+        public Nullable<decimal> DeliveryCharges { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart_Details> Cart_Details { get; set; }

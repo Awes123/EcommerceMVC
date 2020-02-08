@@ -20,7 +20,6 @@
         <MappingFragment StoreEntitySet="Category">
           <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
           <ScalarProperty Name="Category1" ColumnName="Category" />
-          <ScalarProperty Name="Unit" ColumnName="Unit" />
           <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
           <ScalarProperty Name="Date_Modified" ColumnName="Date_Modified" />
         </MappingFragment>
@@ -80,6 +79,8 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="EcommerceModel.Product">
         <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="DeliveryCharges" ColumnName="DeliveryCharges" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
           <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
           <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
           <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />

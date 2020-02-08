@@ -1,0 +1,102 @@
+﻿@model IEnumerable<EcommereceTecvibes.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="col-md-12 mt-4">
+    <div class="panel">
+        <div class="panel-head">
+            <h5 class="panel-title">Products</h5>
+            <a href="/Admin/Products/Create" class="btn btn-outline btn-primary btn-outline-1x btn-gradient btn-shadow m-1 float-right">Add</a>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Category
+                        </th>
+                        <th>
+                            Product
+                        </th>
+                        <th>
+                            Unit
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                           Price
+                        </th>
+                        <th>
+                            Sale
+                        </th>
+                        <th>
+                            Discount
+                        </th>
+                        <th>
+                           Final Price
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Date Created
+                        </th>
+                        <th>
+                            Date Modified
+                        </th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.Category1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Unit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sale)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Discount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Final_Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date_Created)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date_Modified)
+                        </td>
+                        <td>
+                            <a href="/Admin/Products/Edit?id=@item.Category_ID" class="btn btn-outline btn-info btn-outline-1x btn-gradient btn-shadow">Edit</a>
+                        </td>
+                        <td>
+                            <a href="/Admin/Products/Delete?id=@item.Category_ID" id="sweetalert-4" class="btn btn-outline btn-danger btn-outline-1x btn-gradient btn-shadow">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
