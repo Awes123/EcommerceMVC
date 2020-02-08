@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart_Details">
+          <Key>
+            <PropertyRef Name="Cart_ID" />
+          </Key>
+          <Property Name="Cart_ID" Type="int" Nullable="false" />
+          <Property Name="User_ID" Type="int" />
+          <Property Name="Product_ID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FinalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Date_Modified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="nvarchar(max)" />
+          <Property Name="Unit" Type="nvarchar(max)" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Date_Modified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Order_Status">
+          <Key>
+            <PropertyRef Name="Status_ID" />
+          </Key>
+          <Property Name="Status_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Order_ID" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Date_Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cart_ID" Type="int" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="FinalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Discount_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DeliveryCharges" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Date_Modified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PaymentDetails">
+          <Key>
+            <PropertyRef Name="Payment_ID" />
+          </Key>
+          <Property Name="Payment_ID" Type="int" Nullable="false" />
+          <Property Name="Order_ID" Type="int" />
+          <Property Name="Payment_By" Type="nvarchar" MaxLength="50" />
+          <Property Name="Payment_Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Transaction_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Date_Modified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Product_Image">
+          <Key>
+            <PropertyRef Name="PrdImg_ID" />
+          </Key>
+          <Property Name="PrdImg_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_ID" Type="int" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="ContentType" Type="nvarchar(max)" />
+          <Property Name="Data" Type="varbinary(max)" />
+          <Property Name="Date_Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_ID" Type="int" />
+          <Property Name="Product_Name" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Sale" Type="nvarchar" MaxLength="10" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Final_Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="nvarchar" MaxLength="10" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Date_Modified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="HashPassword" Type="varbinary" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Date_Modified" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Cart_Details_ToTable_1">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Cart_Details" Type="Self.Cart_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Cart_Details">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Details_ToUserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <End Role="Cart_Details" Type="Self.Cart_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Cart_Details">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Status_ToOrderDetial">
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
+          <End Role="Order_Status" Type="Self.Order_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetail">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Order_Status">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_ToCart_Details">
+          <End Role="Cart_Details" Type="Self.Cart_Details" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart_Details">
+              <PropertyRef Name="Cart_ID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="Cart_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_ToOrderDetail">
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetail">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Image_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Product_Image" Type="Self.Product_Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Product_Image">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ToCategory">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EcommerceModelStoreContainer">
+          <EntitySet Name="Cart_Details" EntityType="Self.Cart_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Status" EntityType="Self.Order_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Image" EntityType="Self.Product_Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cart_Details_ToTable_1" Association="Self.FK_Cart_Details_ToTable_1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Cart_Details" EntitySet="Cart_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Details_ToUserDetails" Association="Self.FK_Cart_Details_ToUserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Cart_Details" EntitySet="Cart_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Status_ToOrderDetial" Association="Self.FK_Order_Status_ToOrderDetial">
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+            <End Role="Order_Status" EntitySet="Order_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_ToCart_Details" Association="Self.FK_OrderDetail_ToCart_Details">
+            <End Role="Cart_Details" EntitySet="Cart_Details" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_ToOrderDetail" Association="Self.FK_PaymentDetails_ToOrderDetail">
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Image_ToProducts" Association="Self.FK_Product_Image_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Image" EntitySet="Product_Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ToCategory" Association="Self.FK_Products_ToCategory">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EcommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cart_Details">
+          <Key>
+            <PropertyRef Name="Cart_ID" />
+          </Key>
+          <Property Name="Cart_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" />
+          <Property Name="Product_ID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FinalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Modified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Cart_Details_ToTable_1" FromRole="Cart_Details" ToRole="Products" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_Cart_Details_ToUserDetails" FromRole="Cart_Details" ToRole="UserDetails" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_ToCart_Details" FromRole="Cart_Details" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Modified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_ToCategory" FromRole="Category" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Order_Status">
+          <Key>
+            <PropertyRef Name="Status_ID" />
+          </Key>
+          <Property Name="Status_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order_ID" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_Order_Status_ToOrderDetial" FromRole="Order_Status" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cart_ID" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FinalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Discount_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DeliveryCharges" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Modified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cart_Details" Relationship="Self.FK_OrderDetail_ToCart_Details" FromRole="OrderDetail" ToRole="Cart_Details" />
+          <NavigationProperty Name="Order_Status" Relationship="Self.FK_Order_Status_ToOrderDetial" FromRole="OrderDetail" ToRole="Order_Status" />
+          <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_ToOrderDetail" FromRole="OrderDetail" ToRole="PaymentDetails" />
+        </EntityType>
+        <EntityType Name="PaymentDetail">
+          <Key>
+            <PropertyRef Name="Payment_ID" />
+          </Key>
+          <Property Name="Payment_ID" Type="Int32" Nullable="false" />
+          <Property Name="Order_ID" Type="Int32" />
+          <Property Name="Payment_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Transaction_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Modified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_PaymentDetails_ToOrderDetail" FromRole="PaymentDetails" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="Product_Image">
+          <Key>
+            <PropertyRef Name="PrdImg_ID" />
+          </Key>
+          <Property Name="PrdImg_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_ID" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Image_ToProducts" FromRole="Product_Image" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_ID" Type="Int32" />
+          <Property Name="Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Sale" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Final_Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Modified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cart_Details" Relationship="Self.FK_Cart_Details_ToTable_1" FromRole="Products" ToRole="Cart_Details" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Products_ToCategory" FromRole="Products" ToRole="Category" />
+          <NavigationProperty Name="Product_Image" Relationship="Self.FK_Product_Image_ToProducts" FromRole="Products" ToRole="Product_Image" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HashPassword" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Modified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cart_Details" Relationship="Self.FK_Cart_Details_ToUserDetails" FromRole="UserDetails" ToRole="Cart_Details" />
+        </EntityType>
+        <Association Name="FK_Cart_Details_ToTable_1">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Cart_Details" Type="Self.Cart_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Cart_Details">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Details_ToUserDetails">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="Cart_Details" Type="Self.Cart_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Cart_Details">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_ToCart_Details">
+          <End Role="Cart_Details" Type="Self.Cart_Details" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart_Details">
+              <PropertyRef Name="Cart_ID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="Cart_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ToCategory">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Status_ToOrderDetial">
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
+          <End Role="Order_Status" Type="Self.Order_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetail">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Order_Status">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_ToOrderDetail">
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetail">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Image_ToProducts">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product_Image" Type="Self.Product_Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Product_Image">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EcommerceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cart_Details" EntityType="Self.Cart_Details" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Order_Status" EntityType="Self.Order_Status" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetail" />
+          <EntitySet Name="Product_Image" EntityType="Self.Product_Image" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <AssociationSet Name="FK_Cart_Details_ToTable_1" Association="Self.FK_Cart_Details_ToTable_1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Cart_Details" EntitySet="Cart_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Details_ToUserDetails" Association="Self.FK_Cart_Details_ToUserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Cart_Details" EntitySet="Cart_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_ToCart_Details" Association="Self.FK_OrderDetail_ToCart_Details">
+            <End Role="Cart_Details" EntitySet="Cart_Details" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ToCategory" Association="Self.FK_Products_ToCategory">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Status_ToOrderDetial" Association="Self.FK_Order_Status_ToOrderDetial">
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+            <End Role="Order_Status" EntitySet="Order_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_ToOrderDetail" Association="Self.FK_PaymentDetails_ToOrderDetail">
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Image_ToProducts" Association="Self.FK_Product_Image_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Image" EntitySet="Product_Image" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EcommerceModelStoreContainer" CdmEntityContainer="EcommerceEntities">
+          <EntitySetMapping Name="Cart_Details">
+            <EntityTypeMapping TypeName="EcommerceModel.Cart_Details">
+              <MappingFragment StoreEntitySet="Cart_Details">
+                <ScalarProperty Name="Cart_ID" ColumnName="Cart_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Date_Modified" ColumnName="Date_Modified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="EcommerceModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Category1" ColumnName="Category" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Date_Modified" ColumnName="Date_Modified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Status">
+            <EntityTypeMapping TypeName="EcommerceModel.Order_Status">
+              <MappingFragment StoreEntitySet="Order_Status">
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="EcommerceModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Cart_ID" ColumnName="Cart_ID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="FinalAmount" ColumnName="FinalAmount" />
+                <ScalarProperty Name="Discount_Amount" ColumnName="Discount_Amount" />
+                <ScalarProperty Name="DeliveryCharges" ColumnName="DeliveryCharges" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Date_Modified" ColumnName="Date_Modified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentDetails">
+            <EntityTypeMapping TypeName="EcommerceModel.PaymentDetail">
+              <MappingFragment StoreEntitySet="PaymentDetails">
+                <ScalarProperty Name="Payment_ID" ColumnName="Payment_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Payment_By" ColumnName="Payment_By" />
+                <ScalarProperty Name="Payment_Status" ColumnName="Payment_Status" />
+                <ScalarProperty Name="Transaction_ID" ColumnName="Transaction_ID" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Date_Modified" ColumnName="Date_Modified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Image">
+            <EntityTypeMapping TypeName="EcommerceModel.Product_Image">
+              <MappingFragment StoreEntitySet="Product_Image">
+                <ScalarProperty Name="PrdImg_ID" ColumnName="PrdImg_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="EcommerceModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Final_Price" ColumnName="Final_Price" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Date_Modified" ColumnName="Date_Modified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="EcommerceModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="HashPassword" ColumnName="HashPassword" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Date_Modified" ColumnName="Date_Modified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

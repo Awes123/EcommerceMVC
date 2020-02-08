@@ -1,0 +1,64 @@
+﻿@model EcommereceTecvibes.Models.UserDetail
+
+    @{
+        Layout = null;
+    }
+<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from themesbrand.com/lexa/html/vertical/pages-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Feb 2020 15:25:27 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimal-ui">
+    <title>Login</title>
+    <meta content="Admin Dashboard" name="description">
+    <meta content="Themesbrand" name="author">
+    <link rel="icon" type="image/x-icon" href="~/Media/images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="~/Media/dist/css/style.css" />
+</head>
+<body>
+    <!-- Begin page -->
+    <div class="lgn-background" style="background-image: url(../../Media/uploads/Background.png);">
+        <div class="lgn-wrapper">
+            <div class="lgn-logo text-center">
+                <a><img src="~/Media/images/logo-white.png" alt=""></a>
+            </div>
+            <div id="login-form" class="lgn-form ">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="lgn-input form-group">
+                    <label class="control-label col-sm-12">Username</label>
+                    <div class="col-sm-12">
+                        <input class="form-control" type="text" name="Username" id="lgn-mail" placeholder="Enter your Username" autocomplete="off">
+                    </div>
+                </div>
+                <div class="lgn-input form-group">
+                    <label class="control-label col-sm-12">Password</label>
+                    <div class="col-sm-12">
+                        <input type="password" name="Password" id="lgn-pass" class="form-control" placeholder="Enter your Password" autocomplete="off">
+                    </div>
+                </div>
+                <div class="lgn-forgot">
+                    <a href="#">Forgotten Password?</a>
+                </div>
+                <div class="lgn-submit">
+                    <button type="submit" id="lgn-submit" class="btn btn-primary btn-pill btn-lg" name="login">Login</button>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+
+    <!-- Include js files -->
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="~/Mediaassets/plugin/jquery/jquery-3.3.1.min.js"></script>
+    <!-- Popper Plugin -->
+    <script type="text/javascript" src="~/Mediaassets/plugin/popper/popper.min.js"></script>
+    <!-- Bootstrap Framework -->
+    <script type="text/javascript" src="~/Mediaassets/plugin/bootstrap/bootstrap.min.js"></script>
+</body>
+<!-- Mirrored from themesbrand.com/lexa/html/vertical/pages-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Feb 2020 15:25:27 GMT -->
+</html>
