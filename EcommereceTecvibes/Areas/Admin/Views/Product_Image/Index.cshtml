@@ -4,54 +4,57 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="col-md-12 mt-4">
+    <div class="panel">
+        <div class="panel-head">
+            <h5 class="panel-title">Categories</h5>
+            <a href="/Admin/Product_Image/Create" class="btn btn-outline btn-primary btn-outline-1x btn-gradient btn-shadow m-1 float-right">Add</a>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Product
+                        </th>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Date Created
+                        </th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Product_Name)
+                            </td>
+                            <td>
+                                @{
+                                    var base64 = Convert.ToBase64String(item.Data);
+                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContentType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Data)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date_Created)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.Product_Name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date_Created)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.Product_Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PrdImg_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PrdImg_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PrdImg_ID })
-        </td>
-    </tr>
-}
-
-</table>
+                                <img src="@imgSrc" width="70" class="img-fluid" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date_Created)
+                            </td>
+                            <td>
+                                <a href="/Admin/Product_Image/Edit?id=@item.PrdImg_ID" class="btn btn-outline btn-info btn-outline-1x btn-gradient btn-shadow">Edit</a>
+                            </td>
+                            <td>
+                                <a href="/Admin/Product_Image/Delete?id=@item.PrdImg_ID" id="sweetalert-4" class="btn btn-outline btn-danger btn-outline-1x btn-gradient btn-shadow">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

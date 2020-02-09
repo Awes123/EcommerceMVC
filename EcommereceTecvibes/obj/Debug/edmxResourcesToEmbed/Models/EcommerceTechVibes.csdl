@@ -99,6 +99,7 @@
     <NavigationProperty Name="Product_Image" Relationship="Self.FK_Product_Image_ToProducts" FromRole="Products" ToRole="Product_Image" />
     <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DeliveryCharges" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="UserDetail">
     <Key>

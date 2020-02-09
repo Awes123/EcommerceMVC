@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -22,6 +23,11 @@ namespace EcommereceTecvibes.Areas.Admin
             return View(product_Image.ToList());
         }
 
+        public ActionResult ShowPhoto(byte[] bytes)
+        {
+            byte[] result = bytes;
+            return File(result, "image/png");
+        }
         // GET: Admin/Product_Image/Details/5
         [Authorize]
         public ActionResult Details(int? id)
@@ -52,15 +58,34 @@ namespace EcommereceTecvibes.Areas.Admin
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "PrdImg_ID,Product_ID,Image,ContentType,Data,Date_Created")] Product_Image product_Image)
+        public ActionResult Create(Product_Image product_Image)
         {
             if (ModelState.IsValid)
             {
-                db.Product_Image.Add(product_Image);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Product_Image pi = new Product_Image();
+                pi.Product_ID = product_Image.Product_ID;
+                var files = Request.Files;
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    HttpPostedFileBase file = Request.Files[i];
+                    int fileSize = file.ContentLength;
+                    string fileName = file.FileName;
+                    string mimeType = file.ContentType;
+                    System.IO.Stream fileContent = file.InputStream;
+                    byte[] bytes;
+                    using (BinaryReader br = new BinaryReader(fileContent))
+                    {
+                        bytes = br.ReadBytes(fileSize);
+                    }
+                    pi.Image = Path.GetFileName(fileName);
+                    pi.ContentType = mimeType;
+                    pi.Data = bytes;
+                    pi.Date_Created = DateTime.Now;
+                    db.Product_Image.Add(pi);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
             ViewBag.Product_ID = new SelectList(db.Products, "Product_ID", "Product_Name", product_Image.Product_ID);
             return View(product_Image);
         }

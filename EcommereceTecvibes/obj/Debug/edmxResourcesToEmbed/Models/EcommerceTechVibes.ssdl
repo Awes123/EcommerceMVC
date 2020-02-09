@@ -76,6 +76,7 @@
     <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Category_ID" Type="int" />
     <Property Name="Product_Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Unit" Type="nvarchar(max)" />
     <Property Name="Quantity" Type="int" />
     <Property Name="Sale" Type="nvarchar" MaxLength="10" />

@@ -319,6 +319,7 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>EcommerceTechVibes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Common.cs" />
     <Compile Include="Models\EcommerceTechVibes.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

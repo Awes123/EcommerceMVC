@@ -52,11 +52,23 @@ namespace EcommereceTecvibes.Areas.Admin.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Product_ID,Category_ID,Product_Name,Quantity,Sale,Price,Discount,Final_Price,Status,Date_Created,Date_Modified")] Product product)
+        public ActionResult Create(Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                Product products = new Product();
+                products.Category_ID = product.Category_ID;
+                products.Product_Name = product.Product_Name;
+                products.Quantity = product.Quantity;
+                products.Unit = product.Unit;
+                products.Sale = product.Sale;
+                products.Price = product.Price;
+                products.Discount = product.Discount;
+                products.Final_Price = product.Final_Price;
+                products.Status = product.Status;
+                products.Description = product.Description;
+                products.Date_Created = DateTime.Now;
+                db.Products.Add(products);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -88,13 +100,28 @@ namespace EcommereceTecvibes.Areas.Admin.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Product_ID,Category_ID,Product_Name,Quantity,Sale,Price,Discount,Final_Price,Status,Date_Created,Date_Modified")] Product product)
+        public ActionResult Edit(Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Product products =db.Products.Find(product.Product_ID);
+                if (products != null)
+                {
+                    products.Category_ID = product.Category_ID;
+                    products.Product_Name = product.Product_Name;
+                    products.Quantity = product.Quantity;
+                    products.Unit = product.Unit;
+                    products.Sale = product.Sale;
+                    products.Price = product.Price;
+                    products.Discount = product.Discount;
+                    products.Final_Price = product.Final_Price;
+                    products.Status = product.Status;
+                    products.Description = product.Description;
+                    products.Date_Modified = DateTime.Now;
+                    db.Entry(products).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             ViewBag.Category_ID = new SelectList(db.Categories, "Category_ID", "Category1", product.Category_ID);
             return View(product);
@@ -109,11 +136,9 @@ namespace EcommereceTecvibes.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
+            db.Products.Remove(product);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // POST: Admin/Products/Delete/5

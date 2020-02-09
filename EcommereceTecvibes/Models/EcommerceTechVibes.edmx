@@ -81,6 +81,7 @@
           <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Category_ID" Type="int" />
           <Property Name="Product_Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Unit" Type="nvarchar(max)" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Sale" Type="nvarchar" MaxLength="10" />
@@ -333,6 +334,7 @@
           <NavigationProperty Name="Product_Image" Relationship="Self.FK_Product_Image_ToProducts" FromRole="Products" ToRole="Product_Image" />
           <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DeliveryCharges" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -557,6 +559,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="EcommerceModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DeliveryCharges" ColumnName="DeliveryCharges" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
