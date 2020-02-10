@@ -204,6 +204,14 @@
     <Content Include="Media\images\icon.png" />
     <Content Include="Media\images\logo-white.png" />
     <Content Include="Media\images\logo.png" />
+    <Content Include="Media\Shop\bootstrap.min.css" />
+    <Content Include="Media\Shop\bootstrap.min.js" />
+    <Content Include="Media\Shop\Images\48177233237_5b01f5c5e1_b.jpg" />
+    <Content Include="Media\Shop\Images\camera-1702015_1280.jpg" />
+    <Content Include="Media\Shop\Images\mobile-4596292_960_720.jpg" />
+    <Content Include="Media\Shop\Images\mobile-4637463_960_720.jpg" />
+    <Content Include="Media\Shop\jquery-3.4.1.slim.min.js" />
+    <Content Include="Media\Shop\popper.min.js" />
     <Content Include="Media\uploads\author-1.jpg" />
     <Content Include="Media\uploads\author-2.jpg" />
     <Content Include="Media\uploads\author-3.jpg" />
@@ -309,6 +317,7 @@
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Product_ImageController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -371,6 +380,9 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
