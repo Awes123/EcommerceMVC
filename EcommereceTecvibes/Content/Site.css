@@ -16,3 +16,9 @@ textarea {
     max-width: 280px;
 }
 
+.modal-backdrop {
+    background-color: #0000008f !important;
+}
+.modal-content {
+    border-radius: 0px !important;
+}

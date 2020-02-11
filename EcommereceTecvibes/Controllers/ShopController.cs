@@ -25,9 +25,13 @@ namespace EcommereceTecvibes.Controllers
             var returns = "";
             foreach(Product item in product)
             {
-                returns += "<div class='col-lg-3 pt-2  pl-0 pr-0'><div class='card' style='width: 16rem;'><img src='~/Media/Shop/Images/mobile-4596292_960_720.jpg' class='card-img-top' alt=''><div class='card-body'><h5 class='card-title'>" + item.Product_Name + "</h5><p class='card-text'>" + item.Description.ToString().Substring(0, 40) + "</p><a href='#' class='btn btn-primary'><i class='fa fa-cart-plus'></i></a></div></div></div>";
+                returns += "<div class='col-lg-3 pt-2  pl-0 pr-0'><div class='card' style='width: 16rem;'><img src='/Media/Shop/Images/mobile-4596292_960_720.jpg' class='card-img-top' alt=''><div class='card-body'><h5 class='card-title'>" + item.Product_Name + "</h5><p class='card-text'>" + item.Description.ToString().Substring(0, 40) + "</p><a href='javascript:void(0);' class='btn btn-primary Addtocart'><i class='fa fa-cart-plus'></i></a><a href='javascript:void(0);' class='btn btn-warning ml-1'><i class='fa fa-eye'></i></a></div></div></div>";
             }
             return returns;
 }
+        public bool CheckUser()
+        {
+            return User.Identity.IsAuthenticated?true:false;
+        }
     }
 }
