@@ -205,14 +205,14 @@
                 {
                     if (i == 0)
                     {
-                        <a class="nav-link active" id="v-pills-home-tab" name="@item.Category_ID" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">@item.Category1</a>}
+                        <a class="nav-link active catlink" id="v-pills-home-tab" name="@item.Category_ID" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">@item.Category1</a>}
                     else
                     {
-                        <a class="nav-link " id="v-pills-home-tab" name="@item.Category_ID" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">@item.Category1</a>}
+                        <a class="nav-link catlink" id="v-pills-home-tab" name="@item.Category_ID" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">@item.Category1</a>}
                 }
             </div>
         </div>
-        <div class="col-lg-10 pl-4 row m-0 bg-light pt-0" style="background-color:#d2e4ff !important;">
+        <div class="col-lg-10 pl-4 row m-0 bg-light prodiv pt-0" style="background-color:#d2e4ff !important;">
             @foreach (EcommereceTecvibes.Models.Product item in ViewBag.product)
             {
                 <div class="col-lg-3 pt-2  pl-0 pr-0">
@@ -229,3 +229,21 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger
+    });
+    $(document).on('click', '.catlink', function () {
+        var thisid = parseInt($(this).attr('name'));
+        $.ajax({
+            type: 'Post',
+            contentType: 'Html',
+            url: '/Shop/changeproduct?firstcatid=' + thisid,
+            success: function (response) {
+                $('.prodiv').empty();
+                $('.prodiv').append(response);
+            }
+        })
+    });
+
+</script>
