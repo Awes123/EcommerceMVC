@@ -44,7 +44,7 @@
                                 <a href="/Admin/Categories/Edit?id=@item.Category_ID" class="btn btn-outline btn-info btn-outline-1x btn-gradient btn-shadow">Edit</a>
                             </td>
                             <td>
-                                <a href="/Admin/Categories/Delete?id=@item.Category_ID" id="sweetalert-4" class="btn btn-outline btn-danger btn-outline-1x btn-gradient btn-shadow">Delete</a>
+                                <a href="javascript:void(0);" id="@item.Category_ID" name="@item.Category1" class="btn confirmdel btn-outline btn-danger btn-outline-1x btn-gradient btn-shadow">Delete</a>
                             </td>
                         </tr>
                     }
@@ -54,3 +54,36 @@
         </div>
     </div>
 </div>
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="#" class="btn btn-primary btncofirm">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).on('click', '.confirmdel', function () {
+        debugger
+        var thisid = $(this).attr('id');
+        var thisname = $(this).attr('name');
+        $('.modal-body').children('p').empty();
+        $('.modal-body').children('p').append('Please Confirm deletio of <b> ' + thisname + '</b> Category.');
+        $('.btncofirm').attr('href', '/Admin/Categories/Delete?id=' + thisid);
+        $('.modal').modal('show');
+    });
+    $(document).on('click', '.btncofirm', function () {
+        //Fahad Bhai Please add ajax here for check the product is related category if not then delete.else show modal for message category can't delete
+    });
+</script>

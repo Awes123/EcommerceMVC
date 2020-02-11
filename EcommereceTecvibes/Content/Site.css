@@ -22,3 +22,7 @@ textarea {
 .modal-content {
     border-radius: 0px !important;
 }
+.positionabsoluttoptitle1{
+    position:absolute !important;
+    top:1rem;
+}
